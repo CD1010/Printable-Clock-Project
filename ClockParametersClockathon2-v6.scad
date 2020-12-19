@@ -34,7 +34,7 @@ CC-A-SA licensed.*/
 	trimCircularPitch=3; // a crude way to reduce (im mm) the overall diamater or the gears to fine tune the way the gears mesh together. 0 = no adjustment. Effects both outer gears and pinions. Does not effect escapement teeth.
 
 // Command Parameters
-	showAssembly=false;			// true to show the whole clock, assembled
+	showAssembly=true;			// true to show the whole clock, assembled
 	showToPrint=	!showAssembly;		// true to show only one part, laid out for printing
 
 	partToPrint=	2;		// in laid out to print mode, which part to show
@@ -376,3 +376,6 @@ module backFrame()
 module midFrame()
 {
 }
+
+backFrame();
+frontFrame();

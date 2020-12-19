@@ -6,7 +6,7 @@ This script builds a clock from parameters defined in the script that calls it v
 
 CC-A-SA licensed.*/
 
-use <mcad/involute_gears.scad>
+use <./mcad/involute_gears.scad>
 include <clockworkLibrary.scad> 	// version 12
 
 // Overall Parameters
@@ -57,6 +57,7 @@ gearClearance=0.2*scale;		// clearance for all the gears - default=0.2
 gearBacklash=0.2*scale;		// backlash for all the gears
 gearSpacer=0.5*scale;			// assymetrical axial spacer so the large gear doesn't run into the shoulder supporting the small gear
 
+showAssembly = true;
 
 // Clock calculations
 
@@ -1517,7 +1518,7 @@ module laidOutToPrint(index,show_limits=false,negativeSpace=false)
 
 // Script
 
-echo("Axis Separation:",axis_separation);
+//echo("Axis Separation:",axis_separation);
 
 if (showAssembly==true) rotate (90,[1,0,0]) rotate (clockCorrection,[0,0,1]) assembled(showShafts,showFrame,showNegativeSpace);
 

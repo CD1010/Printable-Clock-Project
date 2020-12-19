@@ -138,6 +138,28 @@ module pinionDrum (drum_height,number_spokes,large_gear_teeth,large_gear_circula
 
 */
 
+/* test 
+
+*/
+
+escapementWheel(
+	radius=66,
+	rimWidth=75,
+	drumHeight=20,
+	toothThickness=.3,
+	numberTeeth=30,
+	toothLength=9,
+	toothLean=30,
+	toothSharpness=5,
+	numberSpokes=4,
+	spokeWidth=5,
+	hubWidth=10,
+	bore=5,
+	clubSize=.2,
+	clubAngle=30);
+
+// End test 
+
 module ring(
 	outerRadius,
 	innerRadius,
@@ -210,7 +232,7 @@ module ringTooth(
 			{
 				rotate(i*360/numberTeeth,[0,0,1])
 				translate([innerRadius+toothLength,0,0]) 
-				child(0);
+				children(0);
 			}
 		}
 
@@ -245,15 +267,18 @@ module drum(
 		translate([0,0,-1])
 		cylinder(drumHeight+2,radius-rimWidth,radius-rimWidth,$fn=30);
 
-	for ( j=[0:numberHoles-1]) // adds the holes
-	{
-		translate([0,0,drumHeight/2])
-		rotate(holeRotate+360/numberHoles*j,[0,0,1]) 
-		rotate(90,[0,1,0])
-		cylinder(r=holeRadius,h=radius+1);
-	}
+        if( numberHoles > 0 ) 
+        {
+            for ( j=[0:numberHoles-1]) // adds the holes
+            {
+                translate([0,0,drumHeight/2])
+                rotate(holeRotate+360/numberHoles*j,[0,0,1]) 
+                rotate(90,[0,1,0])
+                cylinder(r=holeRadius,h=radius+1);
+            }
 
-	}
+        }
+    }
 }
 
 module escapementWheel(
@@ -417,7 +442,7 @@ module placeEscapement (
 {
 	rotate(angle,[0,0,1])
 	translate([0,2*radius*cos(180/numberTeeth*toothSpan),0])
-	child(0);
+	children(0);
 }
 
 module hand(
@@ -484,7 +509,7 @@ module handNotch(
 		{
 			difference()
 			{
-				child(0);
+				children(0);
 				
 				for ( i=[0:2])
 				{
@@ -497,13 +522,13 @@ module handNotch(
 
 		if (notch_width==0)
 		{
-			child(0);
+			children(0);
 		}
 	}
 
 	if (negative_space==true)
 	{
-		child(0);
+		children(0);
 	}
 }
 
@@ -925,8 +950,8 @@ module ratchetArm(
 
 module chirality(clockwise=true)
 {
-	if (clockwise==true) child(0);
-	if (clockwise!=true) mirror([0,0,1]) rotate(180,[1,0,0]) child(0);
+	if (clockwise==true) children(0);
+	if (clockwise!=true) mirror([0,0,1]) rotate(180,[1,0,0]) children(0);
 }
 
 module ratchetGear(

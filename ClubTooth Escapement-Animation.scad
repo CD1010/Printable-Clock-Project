@@ -1,5 +1,5 @@
-use <mcad/involute_gears.scad>
-include <clockworkLibrary.scad> // version 9
+use <MCAD/involute_gears.scad>
+use <clockworkLibrary.scad> // version 0.3
 
 // Overall Parameters
 scale=1;					// scaling factor for the whole model
@@ -20,12 +20,12 @@ numberTeeth=30; 			// number of teeth in the escapement wheel
 toothLength=15*scale; 			// length of the tooth along longest face and to inner radius of the wheel
 toothLean=30; 				// how much the tooth leans over, clockwise, in degrees
 toothSharpness=10; 			// the angle between the two side of each tooth
-clubSize=0.0;				// relative size of the club on the teeth
-clubAngle=22.5;				// impulse face angle
+clubSize=0.2;				// relative size of the club on the teeth
+clubAngle=4;				// impulse face angle
 
 axis_separation=0.5*printLimit*3.2/3; 	// distance between consecutive gear shafts 
 
-pinion8=8;					// number of teeth on the pinion
+pinion8=6;					// number of teeth on the pinion
 ratio8=-2.5;				// gear ratio with the previous wheel
 
 circular_pitch8=axis_separation/(abs(ratio8)+1)/pinion8*360;
@@ -33,7 +33,7 @@ circular_pitch8=axis_separation/(abs(ratio8)+1)/pinion8*360;
 
 // Escapement Parameters
 toothSpan=7.5; 				// how many teeth the escapement spans
-faceAngle=3; 				// how many degrees the impulse face covers seen from the hub of the escapement wheel
+faceAngle=8; 				// how many degrees the impulse face covers seen from the hub of the escapement wheel
 armAngle=24; 				// angle of the escapement's arms
 armWidth=4*scale; 			// width of the escapement's arms
 hubWidth=10*scale; 			// width of the escapement's hub
@@ -57,7 +57,6 @@ module animateEscapement(escAngle,wheelAngle,escapementColor=green)
 	radius=axis_separation-(pinRadius+sleeveThickness+clearance);
 	bore_radius=pinRadius+sleeveThickness+clearance; 
 
-
 	color(escapementColor)
 	rotate(escAngle,[0,0,1])
 	escapement(
@@ -76,7 +75,6 @@ module animateEscapement(escAngle,wheelAngle,escapementColor=green)
 		max_swing=6,
 		entryPalletAngle=45-toothLean+clubAngle, 
 		exitPalletAngle=45-toothLean+clubAngle);
-        
 
 	placeEscapement(180,radius,numberTeeth,toothSpan)
 	rotate(wheelAngle,[0,0,1])
@@ -116,7 +114,7 @@ module animateEscapement(escAngle,wheelAngle,escapementColor=green)
 //animateEscapement(5,-19,red); // exit drop
 
 translate([0,30,0])
-animateEscapement(0,-0,green);
+animateEscapement($t,-$t*360,green);
 
 
 
